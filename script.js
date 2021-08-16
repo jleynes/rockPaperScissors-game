@@ -1,6 +1,6 @@
 // Creating the variables
-// let computerSelection = "";
-// let playerSelection = "";
+let computerSelection = "";
+let playerSelection = "";
 let gameSelection = ["rock", "paper", "scissors"];
 
 // Initial game function
@@ -19,10 +19,18 @@ function playRound(playerSelection, computerSelection) {
   //if statements to see who wins
   if (computerSelection === player) {
     return "It's a tie!";
-  } else if (computerSelection === "paper") {
+  } else if (computerSelection === "paper" && playerSelection === "rock") {
     return "You Lose! Paper beats Rock";
-  } else if (computerSelection === "scissors") {
-    return "You Win! Rock bests Scissors"
+  } else if (computerSelection === "scissors" && playerSelection === "rock") {
+    return "You Win! Rock beats Scissors";
+  } else if (computerSelection === "rock" && playerSelection === "scissors") {
+    return "You Lose! Rock beats Scissors";
+  } else if (computerSelection === "paper" && playerSelection === "scissors") {
+    return "You Win! Scissors beats Paper"
+  } else if (computerSelection === "rock" && playerSelection === "paper") {
+    return "You Win! Paper beats Rock";
+  } else if (computerSelection === "scissors" && playerSelection === "paper") {
+    return "You Lose! Scissors beats Paper";
   } else {
     return "Not a valid input."
   }
@@ -30,10 +38,9 @@ function playRound(playerSelection, computerSelection) {
 
 // Game function to play 5 games
 function game() {
+  playerSelection = window.prompt("What is your selection? (Rock, Paper, or Scissors?)");
+
   for (let i = 0; i <= 4; i++) {
     console.log(playRound(playerSelection, computerPlay()));
   }
 }
-
-const playerSelection = "rock";
-// const computerSelection = computerPlay();
