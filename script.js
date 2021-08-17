@@ -3,6 +3,9 @@ let computerSelection = "";
 let playerSelection = "";
 let gameSelection = ["rock", "paper", "scissors"];
 
+let computerPoints = 0;
+let playerPoints = 0;
+
 // Initial game function
 function computerPlay() {
   // Finds a random number to return random selection from gameSelection array
@@ -40,7 +43,20 @@ function playRound(playerSelection, computerSelection) {
 function game() {
   playerSelection = window.prompt("What is your selection? (Rock, Paper, or Scissors?)");
 
-  for (let i = 0; i <= 4; i++) {
-    console.log(playRound(playerSelection, computerPlay()));
-  }
+  // for (let i = 0; i <= 4; i++) {
+  //   console.log(playRound(playerSelection, computerPlay()));
+  // }
 }
+
+// DOM selector for buttons
+const buttons = document.querySelectorAll('button');
+
+// Applies an eventListener to each button which calls the playRound function with clicked button value
+buttons.forEach((button) => {
+    button.addEventListener('click', function() {
+
+      playerSelection = button.value;
+
+      console.log(playRound(playerSelection, computerPlay()));
+    });
+});
