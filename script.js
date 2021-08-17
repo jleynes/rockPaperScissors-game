@@ -23,16 +23,22 @@ function playRound(playerSelection, computerSelection) {
   if (computerSelection === player) {
     return "It's a tie!";
   } else if (computerSelection === "paper" && playerSelection === "rock") {
+    computerPoints++;
     return "You Lose! Paper beats Rock";
   } else if (computerSelection === "scissors" && playerSelection === "rock") {
+    playerPoints++;
     return "You Win! Rock beats Scissors";
   } else if (computerSelection === "rock" && playerSelection === "scissors") {
+    computerPoints++;
     return "You Lose! Rock beats Scissors";
   } else if (computerSelection === "paper" && playerSelection === "scissors") {
+    playerPoints++;
     return "You Win! Scissors beats Paper"
   } else if (computerSelection === "rock" && playerSelection === "paper") {
+    playerPoints++;
     return "You Win! Paper beats Rock";
   } else if (computerSelection === "scissors" && playerSelection === "paper") {
+    computerPoints++;
     return "You Lose! Scissors beats Paper";
   } else {
     return "Not a valid input."
@@ -57,6 +63,8 @@ buttons.forEach((button) => {
 
       playerSelection = button.value;
 
-      console.log(playRound(playerSelection, computerPlay()));
+      document.querySelector('#gameResult').innerText = playRound(playerSelection, computerPlay());
+      
+      console.log(computerPoints);
     });
 });
