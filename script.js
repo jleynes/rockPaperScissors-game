@@ -19,7 +19,7 @@ function playRound(playerSelection, computerSelection) {
   // Changes all inputs of playerSelection to lower case
   let player = playerSelection.toLowerCase();
 
-  //if statements to see who wins
+  //if statements to see who wins and adds score to total
   if (computerSelection === player) {
     return "It's a tie!";
   } else if (computerSelection === "paper" && playerSelection === "rock") {
@@ -54,17 +54,39 @@ function game() {
   // }
 }
 
+function resetGame() {
+  playerPoints = 0;
+  computerPoints = 0;
+}
+
 // DOM selector for buttons
 const buttons = document.querySelectorAll('button');
 
 // Applies an eventListener to each button which calls the playRound function with clicked button value
 buttons.forEach((button) => {
-    button.addEventListener('click', function() {
+      button.addEventListener('click', function() {
 
-      playerSelection = button.value;
+        // sets playerSelection to button value
+        playerSelection = button.value;
 
-      document.querySelector('#gameResult').innerText = playRound(playerSelection, computerPlay());
-      
-      console.log(computerPoints);
+        // if statement to check if score is less than 5
+        if (computerPoints <= 5 || playerPoints <= 5) {
+          document.querySelector('#gameResult').innerText = playRound(playerSelection, computerPlay());
+
+          document.querySelector('#computerScore').innerText = "Computer Score: " + computerPoints;
+          document.querySelector('#playerScore').innerText = "Player Score: " + playerPoints;
+
+          // if statements to remove eventListener from buttons and resets game
+          if ((computerPoints > playerPoints) && computerPoints == 5) {
+            document.querySelector('#gameResult').innerText = "The computer wins!";
+            button.removeEventListener('click', resetGame());
+            }
+          if ((computerPoints < playerPoints) && playerPoints == 5) {
+            document.querySelector('#gameResult').innerText = "You win!";
+            button.removeEventListener('click', resetGame());
+          }
+        } else {
+          resetGame();
+        }
+      });
     });
-});
